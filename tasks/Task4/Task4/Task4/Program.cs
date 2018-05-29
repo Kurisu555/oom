@@ -1,26 +1,30 @@
 ﻿using System;
 
-namespace Task3
+namespace Task4
 {
     class Program
     {
-        static void Main(string[] args)
+        /*static void Main(string[] args)
         {
 
             SmartPhone[] PhoneListOne = new SmartPhone[] {
-                new IPhone("0123", "Kurisu", "Karma helps ya"),
-                new Android("A0123"),
-                new IPhone("4567", "AppleUser", "Apple forever"),
+                new IPhone(123, "Kurisu", "Karma helps ya"),
+                new Android(123),
+                new IPhone(4567, "AppleUser", "Apple forever"),
             };
-            
-            foreach(var p in PhoneListOne)
+
+            foreach (var p in PhoneListOne)
             {
                 Console.WriteLine(p.TurnOnOff);
 
                 if (p is IPhone) Console.WriteLine("Oh it is a IPhone");
                 else Console.WriteLine("Oh it's just another cheap Android");
             }
-        }
+        }/*
+        static void Main()
+        {
+            
+        }*/
     }
 
     interface IEDevice
@@ -42,7 +46,8 @@ namespace Task3
         {
         }
 
-        public string TurnOnOff{
+        public string TurnOnOff
+        {
             get
             {
                 GetStatus();
@@ -57,17 +62,17 @@ namespace Task3
     }
     class IPhone : SmartPhone
     {
-        private string IPhoneNumber;
+        private int IPhoneNumber;
         public string NickName;
         public string SayIng;
 
-        public IPhone(string IPhoneNumber, string UserNickName, string UserSayIng)
+        public IPhone(int IPhoneNumber, string UserNickName, string UserSayIng)
         {
             this.IPhoneNumber = IPhoneNumber;
             NickN = UserNickName;
             SayI = UserSayIng;
         }
-        public string IPhoneN
+        public int IPhoneN
         {
             get => IPhoneNumber;
         }
@@ -88,20 +93,20 @@ namespace Task3
     }
     class Android : SmartPhone
     {
-        private string SerialNumber;
+        private int SerialNumber;
         public string LogoPath;
 
-        public Android(string SerialNumber, string LogoPath = "")
+        public Android(int SerialNumber, string LogoPath = "")
         {
             SETSerialN = SerialNumber;
             if (LogoPath == "") LogoP = "default Logo";
         }
 
-        public string GETSerialN
+        public int GETSerialN
         {
             get => SerialNumber;
         }
-        private string SETSerialN
+        private int SETSerialN
         {
             set => SerialNumber = value;
         }

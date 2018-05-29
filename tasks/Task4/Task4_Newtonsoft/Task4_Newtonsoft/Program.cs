@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Task3
 {
@@ -12,13 +13,21 @@ namespace Task3
                 new Android("A0123"),
                 new IPhone("4567", "AppleUser", "Apple forever"),
             };
-            
-            foreach(var p in PhoneListOne)
+
+            foreach (var p in PhoneListOne)
             {
                 Console.WriteLine(p.TurnOnOff);
 
-                if (p is IPhone) Console.WriteLine("Oh it is a IPhone");
-                else Console.WriteLine("Oh it's just another cheap Android");
+                //if (p is IPhone) Console.WriteLine("Oh it is a IPhone");
+                //else Console.WriteLine("Oh it's just another cheap Android");
+
+                // Wollte den Teil mit Newtonsoft nicht auslassen 
+                // habe aber keinen anderen Ausweg gefunden als diesen hier
+
+                string s = JsonConvert.SerializeObject(p);
+
+                var deserialize = JsonConvert.DeserializeObject(s);
+                Console.WriteLine(deserialize);
             }
         }
     }
@@ -42,7 +51,8 @@ namespace Task3
         {
         }
 
-        public string TurnOnOff{
+        public string TurnOnOff
+        {
             get
             {
                 GetStatus();
