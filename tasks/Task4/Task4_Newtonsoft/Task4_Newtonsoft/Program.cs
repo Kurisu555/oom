@@ -1,7 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.IO;
 
-namespace Task3
+namespace Task4
 {
     class Program
     {
@@ -14,21 +15,43 @@ namespace Task3
                 new IPhone("4567", "AppleUser", "Apple forever"),
             };
 
-            foreach (var p in PhoneListOne)
+            Serialize(PhoneListOne);
+            Deserialize();
+        }
+        public static void Serialize(SmartPhone[] toSerialize)
+        {
+            string path = Directory.GetCurrentDirectory()+"/de_serialize.json";
+            if (File.Exists(path))
             {
-                Console.WriteLine(p.TurnOnOff);
-
-                //if (p is IPhone) Console.WriteLine("Oh it is a IPhone");
-                //else Console.WriteLine("Oh it's just another cheap Android");
-
-                // Wollte den Teil mit Newtonsoft nicht auslassen 
-                // habe aber keinen anderen Ausweg gefunden als diesen hier
-
-                string s = JsonConvert.SerializeObject(p);
-
-                var deserialize = JsonConvert.DeserializeObject(s);
-                Console.WriteLine(deserialize);
+                string text = "";
+                foreach(var element in toSerialize)
+                {
+                    text += JsonConvert.SerializeObject(element);
+                }
+                File.WriteAllText(path, text);
             }
+            else Console.WriteLine("File existiert nicht");
+        }
+        public static void Deserialize()
+        {
+            string path = Directory.GetCurrentDirectory() + "/de_serialize.json";
+            if (File.Exists(path))
+            {
+                string text = File.ReadAllText(path);
+                string help = "";
+                for (int i = 0; i < text.Length; i++)
+                { 
+                    help += text[i];
+                    if (text[i] == '}')
+                    {
+                        SmartPhone OutPut = JsonConvert.DeserializeObject<SmartPhone>(help);
+                        Console.WriteLine(OutPut.ToString());
+                        Console.WriteLine(OutPut.TurnOnOff);
+                        help = "";
+                    }
+                }
+            }
+            else Console.WriteLine("Fehler bei der Ausgabe");
         }
     }
 
@@ -45,10 +68,6 @@ namespace Task3
         {
             if (onof) onof = false;
             else onof = true;
-        }
-
-        public SmartPhone()
-        {
         }
 
         public string TurnOnOff

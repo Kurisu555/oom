@@ -25,18 +25,24 @@ namespace Task2
         public int PlaceNumber;
         public bool play = true;
 
+        public int PlaceN
+        {
+            get => PlaceN;
+            set => PlaceNumber = value;
+        }
+
 
         public Song(String title, String interpreter, int PlaceNumber = 0)
         {
             this.title = title;
             this.interpreter = interpreter;
-            this.PlaceNumber = PlaceNumber;
+            PlaceN = PlaceNumber;
         }
 
-        public void SetPlaceNumber(int PlaceNumber)
+        /*public void SetPlaceNumber(int PlaceNumber)
         {
             this.PlaceNumber = PlaceNumber;
-        }
+        }*/
 
         public String GetTitleAndInterpreter()
         {
